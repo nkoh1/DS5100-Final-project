@@ -1,6 +1,6 @@
-# Monte Carlo Project
+# Monte Carlo Package
 
-This is a recreation of the Monte Carlo project that involves the simulation of rolling dice, flipping coins, and analyzing text. The following methods and classes were used in the creating of this project:
+This is a recreation of the Monte Carlo simulation which involves rolling dice, tossing coins, and analyzing text. The following methods and classes were used in the creating of this project:
 
 ## Classes and Descriptions:
 
@@ -42,7 +42,9 @@ Parameter `n_rolls`: integer
 `roll_state(self)`:
 The roll_state method will return the last roll occurred.
 
-No parameters.
+Parameters: None
+
+Errors Raised: None
 
 
 ## Game Class Methods Descriptions and Parameters
@@ -57,11 +59,11 @@ The play_game method rolls performs dice rolls and its values are stored in a da
 
 Parameter `rolls`: The number of rolls a die will perform.
 
-`narrow_wide(self, form = "wide")`:
-The narrow_wide method will store the rolled values in a dataframe and allow the user to view the dataframe either narrow or wide.
+`recent_play(self, view = "wide")`:
+The recent_play method will store the rolled values in a dataframe and allow the user to view the dataframe either narrow or wide.
 
 Errors Raised:
-`ValueError` returns if the user input is not narrow or wide
+`ValueError` will return if user input is not either narrow or wide.
 
 
 ## Analyzer Class Methods Descriptions and Parameters
@@ -77,45 +79,67 @@ Errors Raised:
 `jackpot_results (self)`:
 The jackpot_results method checks to see if the rolled Die objects land on the same face. If so, it will record the number of times each number (n=1,...,6) have been rolled and output that as an integer.
 
-No parameters.
+Parameters: None
+
+Errors Raised: None
 
 `count_sides_rolled(self)`:
 The count_sides_rolled method counts how many times a given face was rolled. A dataframe is then returned with its results.
 
-No parameters.
+Parameters: None
+
+Errors Raised: None
 
 `combo_count(self)`:
 The combo_count method computes the distinct combinations of the die faces rolled and returns a dataframe with its results.
 
 No parameters.
 
+Parameters: None
+
+Errors Raised: None
+
 `permutation_counter(self)`:
 The permutation_counter method computes the total number of permutations based on the die faces rolled and returns a dataframe with the total permutations as an integer.
 
-No parameters.
+Parameters: None
+
+Errors Raised: None
 
 # Installation:
 
-`pip install -e .`
+`pip install .`
 
 # Importing:
 
-`import montecarlo
-from montecarlo import montecarlo`
+`import demo as montecarlo`
 
 
 # Creating Die object:
 ## Creating a Die object called `die`
-- `die = Die(6)`
+- `die = Die(n_sides,weight)`
 ## Change the weight of a side
--  `die.weight_change(2,4)`
+-  `roll = self.die.weight_change(5,3)`
 ## Rolling the die
--  `die.roll_dice(5)`
+-  `result = self.die.roll_dice(5)`
 
 # Playing a Game
-## creating a Game object `game`
-- `game = Game(tot_dice=5)`
-- `tot_dice` is the number of dice involved in a roll
-## rolling the dice
+## Creating a Game object `game`
+- `play = Game(6)`
+## Rolling the dice
+-  `play_df = play.play_game(10)`
+## Recent Results
+- `play_wide_df = play.recent_play(view = 'wide')`
 
-- 
+# Creating Analyzer object:
+## Creating jackpot method
+- `play_results = Analyzer(play)`
+
+## Finding total jackpots
+- `play_results.jackpot_results()`
+## Simulating a dice roll for count_sides_rolled()
+- `throw_results = {i:0 for i in range(1,7)}`
+## Finding the total number of times each dice sidde is rolled
+- `throw_results_df = pd.Series(throw_results).sort_index()`
+## Finding total permutations of faces rolled
+- `play_results.perm_counter()` 
